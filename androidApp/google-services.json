@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "648169332492",
+    "project_id": "todoappkmm",
+    "storage_bucket": "todoappkmm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648169332492:android:28c8e156a4c72228147329",
+        "android_client_info": {
+          "package_name": "com.example.todoappkmm.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-QVcZnpEp-cyzne5w4B9BjIQtMCuUbSQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
