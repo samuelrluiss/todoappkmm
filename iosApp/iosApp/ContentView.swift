@@ -8,14 +8,27 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(viewModel.notes, id: \.title) { note in
+                HStack {
+                    Image(resource: \.note)
+                
                 VStack(alignment: .leading) {
                     Text(note.title)
                         .font(.headline)
                     Text(note.text)
                         .font(.subheadline)
                 }
+                }
             }
-            .navigationTitle(title)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack {
+                        Image(resource: \.note)
+                            .resizable()
+                            .frame(width: 30, height: 30) // Adjust the size as needed
+                        Text(title)
+                    }
+                }
+            }
             .onAppear {
                 viewModel.loadNotes()
             }

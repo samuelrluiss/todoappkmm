@@ -10,6 +10,7 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		560B0A902B052CD00052CADC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 560B0A8F2B052CD00052CADC /* Image.swift */; };
 		568F14602B039333001C099F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 568F145F2B039333001C099F /* FirebaseFirestore */; };
 		568F14652B0394E5001C099F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 568F14642B0394E5001C099F /* GoogleService-Info.plist */; };
 		568F14672B03D40E001C099F /* FirebaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568F14662B03D40E001C099F /* FirebaseViewModel.swift */; };
@@ -33,6 +34,7 @@
 		058557BA273AAA24004C7B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
+		560B0A8F2B052CD00052CADC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		568F14642B0394E5001C099F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		568F14662B03D40E001C099F /* FirebaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseViewModel.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				568F14662B03D40E001C099F /* FirebaseViewModel.swift */,
+				560B0A8F2B052CD00052CADC /* Image.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				568F14672B03D40E001C099F /* FirebaseViewModel.swift in Sources */,
+				560B0A902B052CD00052CADC /* Image.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 			);
