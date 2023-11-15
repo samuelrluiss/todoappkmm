@@ -26,7 +26,7 @@ gradle.taskGraph.whenReady {
     if (project.hasProperty("noAppApple")) {
         allTasks.asSequence()
             .filter {
-                it.path.startsWith(":app:ios-combine") ||
+                it.path.startsWith(":app:TodoAppKmm") ||
                         it.path.startsWith(":app:macos") ||
                         it.path.startsWith(":app:web")
             }
