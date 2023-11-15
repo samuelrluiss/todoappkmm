@@ -1,7 +1,8 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
     kotlin("plugin.serialization") version embeddedKotlinVersion
+    id("com.android.library")
+    id("dev.icerock.mobile.multiplatform-resources")
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -41,6 +42,9 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             isStatic = true //this gaves me tons of headaches
+            //Shared Resources
+            export("dev.icerock.moko:resources:0.23.0")
+            export("dev.icerock.moko:graphics:0.9.0") // toUIColor here
         }
     }
 
@@ -49,7 +53,7 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // This line
                 implementation("dev.gitlive:firebase-firestore:1.10.4")
-                //implementation("dev.gitlive:firebase-common:1.10.4")
+                api("dev.icerock.moko:resources:0.23.0")
             }
         }
         val commonTest by getting {
@@ -66,4 +70,11 @@ android {
     defaultConfig {
         minSdk = 24
     }
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.example.todoappkmm"
+    multiplatformResourcesClassName = "SharedResources" // optional, default MR
+    iosBaseLocalizationRegion = "en" // optional, default "en"
+    disableStaticFrameworkWarning = true
 }

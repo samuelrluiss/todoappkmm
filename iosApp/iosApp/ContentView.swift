@@ -3,7 +3,8 @@ import shared
 
 struct ContentView: View {
     @StateObject private var viewModel = FirebaseViewModel()
-
+    var title = Strings().get(id: SharedResources.strings().notes, args: [])
+    
     var body: some View {
         NavigationView {
             List(viewModel.notes, id: \.title) { note in
@@ -14,7 +15,7 @@ struct ContentView: View {
                         .font(.subheadline)
                 }
             }
-            .navigationTitle("Notes")
+            .navigationTitle(title)
             .onAppear {
                 viewModel.loadNotes()
             }

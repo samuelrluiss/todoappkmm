@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,12 +22,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.todoappkmm.Greeting
+import androidx.compose.ui.unit.sp
+import com.example.todoappkmm.SharedResources
+import com.example.todoappkmm.Strings
 import com.google.firebase.Firebase
 import com.google.firebase.initialize
+import dev.icerock.moko.resources.StringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +59,18 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxSize()
                                     .padding(32.dp)
                             ) {
+                                item {
+                                    Text(
+                                        text = stringResource(id = SharedResources.strings.notes),
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 24.sp
+                                    )
+                                }
+
+                                item {
+                                    Spacer(modifier = Modifier.height(24.dp))
+                                }
+                                
                                 items(list) {
                                     NoteItem(note = it)
                                 }
@@ -63,6 +81,11 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+@Composable
+fun stringResource (id: StringResource, vararg args: Any) : String {
+    return Strings(LocalContext.current).get(id, args. toList ())
 }
 
 @Composable

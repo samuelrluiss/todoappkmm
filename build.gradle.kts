@@ -10,3 +10,35 @@ plugins {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+//Sharing Resources
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+
+    dependencies {
+        classpath ("dev.icerock.moko:resources-generator:0.23.0")
+    }
+}
+
+gradle.taskGraph.whenReady {
+    if (project.hasProperty("noAppApple")) {
+        allTasks.asSequence()
+            .filter {
+                it.path.startsWith(":app:ios-combine") ||
+                        it.path.startsWith(":app:macos") ||
+                        it.path.startsWith(":app:web")
+            }
+            .forEach {
+                it.enabled = false
+            }
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
