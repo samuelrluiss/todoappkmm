@@ -10,7 +10,7 @@ import shared
 
 class FirebaseViewModel: ObservableObject {
     @Published var notes: [Note] = []
-    private let firebaseHelper = FirebaseHelper()
+    private let firebaseHelper = FirebaseRepository()
 
     func loadNotes() {
         DispatchQueue.main.async {

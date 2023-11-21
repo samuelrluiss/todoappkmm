@@ -8,15 +8,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(viewModel.notes, id: \.title) { note in
-                HStack {
-                    Image(resource: \.note)
-                
                 VStack(alignment: .leading) {
                     Text(note.title)
                         .font(.headline)
                     Text(note.text)
                         .font(.subheadline)
-                }
                 }
             }
             .toolbar {
@@ -28,6 +24,14 @@ struct ContentView: View {
                         Text(title)
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                     Button(action: {
+                         // Handle the "Add" button tap
+                         // You can perform some action here, for example, navigate to a new screen
+                     }) {
+                         Image(systemName: "plus")
+                     }
+                 }
             }
             .onAppear {
                 viewModel.loadNotes()

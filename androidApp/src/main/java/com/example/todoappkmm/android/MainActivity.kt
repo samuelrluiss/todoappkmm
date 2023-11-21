@@ -1,6 +1,6 @@
 package com.example.todoappkmm.android
 
-import FirebaseHelper
+import FirebaseRepository
 import Note
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,10 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,14 +49,25 @@ class MainActivity : ComponentActivity() {
             var list by remember { mutableStateOf(listOf<Note>()) }
 
             LaunchedEffect(Unit) {
-                list = FirebaseHelper().getNotes()
+                list = FirebaseRepository().getNotes()
             }
 
             MyApplicationTheme {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = MaterialTheme.colors.background)
+                        .background(color = MaterialTheme.colors.background),
+                    floatingActionButton = {
+                        // Floating Action Button
+                        FloatingActionButton(
+                            onClick = {
+                                //todo call create Note
+                            },
+                            modifier = Modifier.padding(16.dp)
+                        ) {
+                            Icon(Icons.Default.Add, contentDescription = "Add")
+                        }
+                    }
                 ) {
                     Box(modifier = Modifier.padding(it)) {
                         if (!list.isNullOrEmpty()) {
