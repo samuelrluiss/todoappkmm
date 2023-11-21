@@ -1,7 +1,6 @@
 package com.example.todoappkmm.android
 
 import FirebaseRepository
-import Note
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,78 +33,88 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import com.example.todoappkmm.HomeScreenViewModel
 import com.example.todoappkmm.SharedResources
 import com.example.todoappkmm.Strings
+import com.example.todoappkmm.model.Note
 import com.google.firebase.Firebase
 import com.google.firebase.initialize
 import dev.icerock.moko.resources.StringResource
+import org.koin.androidx.compose.getViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Firebase.initialize(this) // This line
+
         setContent {
-            var list by remember { mutableStateOf(listOf<Note>()) }
-
-            LaunchedEffect(Unit) {
-                list = FirebaseRepository().getNotes()
-            }
-
             MyApplicationTheme {
-                Scaffold(
+                HomeScreen()
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeScreen(viewModel: HomeScreenViewModel = getViewModel()){
+    var list by remember { mutableStateOf(listOf<Note>()) }
+    viewModel.listOfNotes.addObserver {
+        list = it
+    }
+
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colors.background),
+        floatingActionButton = {
+            // Floating Action Button
+            FloatingActionButton(
+                onClick = {
+                    //todo call create Note
+                },
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "Add")
+            }
+        }
+    ) {
+        Box(modifier = Modifier.padding(it)) {
+            if (!list.isNullOrEmpty()) {
+                LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(color = MaterialTheme.colors.background),
-                    floatingActionButton = {
-                        // Floating Action Button
-                        FloatingActionButton(
-                            onClick = {
-                                //todo call create Note
-                            },
-                            modifier = Modifier.padding(16.dp)
-                        ) {
-                            Icon(Icons.Default.Add, contentDescription = "Add")
+                        .padding(32.dp)
+                ) {
+                    item {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Text(
+                                text = stringResource(id = SharedResources.strings.notes),
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 24.sp
+                            )
+                            Spacer(modifier = Modifier.weight(1f))
+                            Image(
+                                modifier = Modifier.size(48.dp),
+                                painter = painterResource(id = com.example.todoappkmm.R.drawable.note),
+                                contentDescription = "note"
+                            )
                         }
                     }
-                ) {
-                    Box(modifier = Modifier.padding(it)) {
-                        if (!list.isNullOrEmpty()) {
-                            LazyColumn(
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                    .padding(32.dp)
-                            ) {
-                                item {
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(
-                                            text = stringResource(id = SharedResources.strings.notes),
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 24.sp
-                                        )
-                                        Spacer(modifier = Modifier.weight(1f))
-                                        Image(
-                                            modifier = Modifier.size(48.dp),
-                                            painter = painterResource(id = com.example.todoappkmm.R.drawable.note),
-                                            contentDescription = "note"
-                                        )
-                                    }
-                                }
 
-                                item {
-                                    Spacer(modifier = Modifier.height(24.dp))
-                                }
-                                
-                                items(list) {
-                                    NoteItem(note = it)
-                                }
-                            }
-                        }
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
+
+                    items(list) {
+                        NoteItem(note = it)
                     }
                 }
             }
         }
     }
+
 }
 
 @Composable

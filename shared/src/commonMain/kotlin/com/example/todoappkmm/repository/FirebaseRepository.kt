@@ -1,12 +1,9 @@
+import com.example.todoappkmm.model.Note
 import dev.gitlive.firebase.Firebase
 import dev.gitlive.firebase.firestore.firestore
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class Note(
-    val title: String,
-    val text: String
-)
+
 
 class FirebaseRepository {
     private val firebaseFirestore = Firebase.firestore

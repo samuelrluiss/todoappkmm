@@ -7,6 +7,7 @@ struct iOSApp: App {
     
     init() {
         FirebaseApp.configure()
+        KoinHelperKt.doInitKoin()
     }
     
 	var body: some Scene {

@@ -49,4 +49,8 @@ dependencies {
     implementation("androidx.activity:activity-compose:1.8.0")
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("io.insert-koin:koin-android:3.5.0")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("dev.icerock.moko:mvvm-livedata:0.16.1")
 }
