@@ -7,7 +7,6 @@ import kotlinx.serialization.Serializable
 class FirebaseRepository {
     private val firebaseFirestore = Firebase.firestore
     suspend fun getNotes(): List<Note> {
-
         try {
             val notesResponse =
                 firebaseFirestore.collection("NOTES").get()
