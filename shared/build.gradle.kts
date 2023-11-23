@@ -63,9 +63,6 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1") // This line
                 implementation("dev.gitlive:firebase-firestore:1.10.4")
-                //implementation("dev.icerock.moko:mvvm-core:0.16.1")
-                //implementation("dev.icerock.moko:mvvm-flow:0.16.1")
-                //implementation("dev.icerock.moko:mvvm-livedata:0.16.1")
                 implementation("io.insert-koin:koin-core:3.2.0")
                 api("dev.icerock.moko:resources:0.23.0")
                 api("dev.icerock.moko:mvvm-core:0.16.1")

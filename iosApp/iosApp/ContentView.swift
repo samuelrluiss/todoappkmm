@@ -40,10 +40,9 @@ struct ContentView: View {
                     }
                 }
             } else {
+                //todo insert loader here
                 Text("Loading...")
             }
-            
-
         }
     }
 }

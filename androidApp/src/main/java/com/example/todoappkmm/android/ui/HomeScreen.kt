@@ -1,9 +1,5 @@
-package com.example.todoappkmm.android
+package com.example.todoappkmm.android.ui
 
-import FirebaseRepository
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,50 +11,34 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import com.example.todoappkmm.HomeScreenViewModel
+import androidx.navigation.NavController
+import com.example.todoappkmm.presentation.HomeScreenViewModel
+import com.example.todoappkmm.R
 import com.example.todoappkmm.SharedResources
-import com.example.todoappkmm.Strings
+import com.example.todoappkmm.android.navigation.Screen
 import com.example.todoappkmm.model.Note
-import com.google.firebase.Firebase
-import com.google.firebase.initialize
-import dev.icerock.moko.resources.StringResource
 import org.koin.androidx.compose.getViewModel
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Firebase.initialize(this) // This line
-
-        setContent {
-            MyApplicationTheme {
-                HomeScreen()
-            }
-        }
-    }
-}
-
 @Composable
-fun HomeScreen(viewModel: HomeScreenViewModel = getViewModel()){
+fun HomeScreen(viewModel: HomeScreenViewModel = getViewModel(), navController: NavController){
     var list by remember { mutableStateOf(listOf<Note>()) }
     viewModel.listOfNotes.addObserver {
         list = it
@@ -72,7 +52,7 @@ fun HomeScreen(viewModel: HomeScreenViewModel = getViewModel()){
             // Floating Action Button
             FloatingActionButton(
                 onClick = {
-                    //todo call create Note
+                    navController.navigate(Screen.CreateNoteScreen.route)
                 },
                 modifier = Modifier.padding(16.dp)
             ) {
@@ -97,7 +77,7 @@ fun HomeScreen(viewModel: HomeScreenViewModel = getViewModel()){
                             Spacer(modifier = Modifier.weight(1f))
                             Image(
                                 modifier = Modifier.size(48.dp),
-                                painter = painterResource(id = com.example.todoappkmm.R.drawable.note),
+                                painter = painterResource(id = R.drawable.note),
                                 contentDescription = "note"
                             )
                         }
@@ -115,33 +95,4 @@ fun HomeScreen(viewModel: HomeScreenViewModel = getViewModel()){
         }
     }
 
-}
-
-@Composable
-fun stringResource (id: StringResource, vararg args: Any) : String {
-    return Strings(LocalContext.current).get(id, args. toList ())
-}
-
-@Composable
-fun NoteItem(note: Note) {
-    Row(modifier = Modifier.padding(vertical = 8.dp)) {
-        Text(
-            text = note.title
-        )
-        Spacer(modifier = Modifier.weight(1F))
-        Text(
-            text = if (note.text.length > 20) note.text.take(20) + "..." else note.text,
-            overflow = TextOverflow.Ellipsis,
-            softWrap = true,
-            maxLines = 1
-        )
-    }
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        NoteItem(note = Note("Title", "Text sdjaskdnaskdnaskdnaskdnas dasndnaskndkasndkasdn "))
-    }
 }

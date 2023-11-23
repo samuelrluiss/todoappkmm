@@ -53,4 +53,6 @@ dependencies {
     implementation("io.insert-koin:koin-androidx-compose:3.5.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
     implementation("dev.icerock.moko:mvvm-livedata:0.16.1")
+    implementation ("androidx.navigation:navigation-compose:2.7.5")
+    implementation ("com.google.dagger:hilt-android:2.48")
 }
